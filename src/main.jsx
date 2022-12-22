@@ -13,7 +13,12 @@ import ErrorPage from './error-page';
 import Contact, {
   loader as contactLoader
 } from './routes/contact';
-import EditContact from './routes/edit';
+import EditContact, {
+  loader as editLoader,
+  action as editAction,
+} from './routes/edit';
+import { action as deleteAction } from './routes/destroy';
+import Index from './routes/index';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +28,7 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
+      { index: true, element: <Index /> },
       {
         path: 'contacts/:contactId',
         element: <Contact />,
@@ -31,7 +37,13 @@ const router = createBrowserRouter([
       {
         path: 'contacts/:contactId/edit',
         element: <EditContact />,
-        loader: contactLoader,
+        loader: editLoader,
+        action: editAction,
+      },
+      {
+        path: 'contacts/:contactId/destroy',
+        action: deleteAction,
+        errorElement: <div>Oops! There was an error.</div>,
       }
     ]
   },

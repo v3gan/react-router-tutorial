@@ -54,22 +54,25 @@ export default function Contact() {
 
         <div>
             <Form action="edit">
-            <button type="submit">Edit</button>
+                <button type="submit">Edit</button>
             </Form>
+            {/* 
+                Note the action below points to "destroy". 
+                Like <Link to>, <Form action> can take a relative value. 
+                Since the form is rendered in contact/:contactId, 
+                then a relative action with destroy will submit the form to 
+                contact/:contactId/destroy when clicked. 
+            */}
             <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-                if (
-                !confirm(
-                    "Please confirm you want to delete this record."
-                )
-                ) {
-                event.preventDefault();
-                }
-            }}
+                method="post"
+                action="destroy"
+                onSubmit={(event) => {
+                    if (!confirm("Please confirm you want to delete this record.")) {
+                        event.preventDefault();
+                    }
+                }}
             >
-            <button type="submit">Delete</button>
+                <button type="submit">Delete</button>
             </Form>
         </div>
         </div>
