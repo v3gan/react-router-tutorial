@@ -25,30 +25,35 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
-    errorElement: <ErrorPage />,
     loader: rootLoader,
     action: rootAction,
+    errorElement: <ErrorPage />,
     children: [
-      { 
-        index: true, 
-        element: <Index />,
-      },
       {
-        path: 'contacts/:contactId',
-        element: <Contact />,
-        loader: contactLoader,
-        action: contactAction,
-      },
-      {
-        path: 'contacts/:contactId/edit',
-        element: <EditContact />,
-        loader: editLoader,
-        action: editAction,
-      },
-      {
-        path: 'contacts/:contactId/destroy',
-        action: deleteAction,
-        errorElement: <div>Oops! There was an error.</div>,
+        errorElement: <ErrorPage />,
+        children: [
+          { 
+            index: true, 
+            element: <Index />,
+          },
+          {
+            path: 'contacts/:contactId',
+            element: <Contact />,
+            loader: contactLoader,
+            action: contactAction,
+          },
+          {
+            path: 'contacts/:contactId/edit',
+            element: <EditContact />,
+            loader: editLoader,
+            action: editAction,
+          },
+          {
+            path: 'contacts/:contactId/destroy',
+            action: deleteAction,
+            errorElement: <div>Oops! There was an error.</div>,
+          }
+        ]
       }
     ]
   },
